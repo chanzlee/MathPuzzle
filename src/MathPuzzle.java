@@ -2,8 +2,9 @@ import java.util.Scanner;
 
 public class MathPuzzle {
     public static void main(String[] args) {
-//        System.out.println(BaseConversion());
-        System.out.println(BaseConversionRecursive());
+//        BaseConversion();
+//        System.out.println(BaseConversionRecursive());
+        ReverseBaseConversion();
     }
 
 
@@ -46,7 +47,7 @@ public class MathPuzzle {
     //N is 10 base number. Convert it to B base number.(2<=B<=36)
     // If 1 digit gets bigger than 9, use alphabet like
     // A: 10, B:11, ... ,Z: 35
-    public static String BaseConversion() {
+    public static void BaseConversion() {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int b = sc.nextInt();
@@ -63,7 +64,7 @@ public class MathPuzzle {
                 n = n/b;
             }
         }
-        return answer;
+        System.out.println(answer);
     }
 
     public static String BaseConversionRecursive() {
@@ -83,5 +84,32 @@ public class MathPuzzle {
             answer = (char) temp + answer;
         }
         return BaseConversionRecursive(n/b,b,answer);
+    }
+
+    //2745
+    //Convert B based number N into 10 base number. (returned number doesn't exceed 100,000,000)
+    public static void ReverseBaseConversion () {
+        Scanner sc = new Scanner(System.in);
+        String n = sc.next();
+        int b = sc.nextInt();
+
+        char[] arr = n.toCharArray();
+        int size = arr.length;
+        int answer =0;
+
+        for (int i=0; i<size; i++) {
+
+            answer*=b;
+            if((int) arr[i]-48 >= 0 && (int) arr[i]-48 <= 9) {
+                //'1' is 49
+                answer += (arr[i] -48);
+            } else {
+                //'A" is 65; ( offset 65 - 10)
+                answer += ((int) arr[i] - 55);
+            }
+            System.out.println(answer);
+        }
+
+        System.out.println(answer);
     }
 }
