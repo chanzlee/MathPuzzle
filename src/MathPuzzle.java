@@ -4,7 +4,9 @@ public class MathPuzzle {
     public static void main(String[] args) {
 //        BaseConversion();
 //        System.out.println(BaseConversionRecursive());
-        ReverseBaseConversion();
+//        ReverseBaseConversion();
+//        System.out.println(PrimeNumber());
+        SieveOfEratosthenes(100);
     }
 
 
@@ -107,9 +109,60 @@ public class MathPuzzle {
                 //'A" is 65; ( offset 65 - 10)
                 answer += ((int) arr[i] - 55);
             }
-            System.out.println(answer);
         }
 
         System.out.println(answer);
+    }
+
+    // Note that conversion between bases other than 10 can be mitigated by 10base conversion.
+    public static boolean PrimeNumber() {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+
+        if (n < 2) return false;
+
+        // N = a*b, (if not prime number)
+        // Smallest possible a is 2,
+        // thus biggest possible b is n/2
+
+
+        // but, this is inefficient compare to root(n).
+        // If a> root(n) && b> root(n), a*b > n, so a , b are not the right combination.
+        // There can be a error term if real number is used for root(n).
+        // So, powering by 2 on both LHS and RHS will result below limit condition.
+
+        for (int i=2; i*i<=n; i++) {
+            if (n%i==0 ) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void SieveOfEratosthenes(int n) {
+        int[] numbers = new int[n];
+        boolean[] crossed = new boolean[n+1];
+
+        int primeNumberCnt = 0;
+
+        for (int i= 2; i<= n; i++){
+            if(crossed[i]==false) {
+                numbers[primeNumberCnt++] = i;
+
+                // j less than i*i was already crossed out from previous i loop.
+                for ( int j = i*i; j<=n; j+=i) {
+                    crossed[j] = true;
+                }
+            }
+        }
+
+        for(int i=0;i<n;i++) {
+            if (numbers[i]<=0) break;
+            System.out.println(numbers[i]);
+        }
+
+        // O(n) *  (n/2 + n/3 + ... + n/n  <= loglogN)
+        // = O(n loglogN), very close to O(n), lot faster than previous O(n root(n)) solution.
+        // real implementation involves setting i*i as i+i to prevent overflow.
     }
 }
