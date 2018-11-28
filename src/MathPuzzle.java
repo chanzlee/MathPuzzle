@@ -8,7 +8,10 @@ public class MathPuzzle {
 //        System.out.println(PrimeNumber());
 //        SieveOfEratosthenes(100);
 //        GoldbachsConjecture(78);
-        PrimeFactorization(42);
+//        PrimeFactorization(42);
+//        System.out.println(Factorial(10));
+        ZeroInFactorial(100);
+
     }
 
 
@@ -206,5 +209,22 @@ public class MathPuzzle {
         if (n >1) {
             System.out.println(n);
         }
+    }
+
+    public static long Factorial (int n) {
+        long answer = 1;
+        for (int i = 2; i<=n; i++) {
+            answer*=i;
+        }
+        return answer;
+    }
+
+    public static void ZeroInFactorial (int n) {
+        // If run Prime factorization, there will be more 2 than 5 due to event numbers.
+        // thus get number of the time 5 is multiplied.
+        // in combination, we should consider both 2 and 5 as there can be less 2 after division.
+        int answer = n/5 + n/25;
+
+        System.out.println(answer);
     }
 }
