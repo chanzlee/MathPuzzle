@@ -7,7 +7,8 @@ public class MathPuzzle {
 //        ReverseBaseConversion();
 //        System.out.println(PrimeNumber());
 //        SieveOfEratosthenes(100);
-        GoldbachsConjecture(78);
+//        GoldbachsConjecture(78);
+        PrimeFactorization(42);
     }
 
 
@@ -191,6 +192,19 @@ public class MathPuzzle {
                 int b = n - primeNumbers[i];
                 System.out.println(a + " + " + b + " = " + n);
             }
+        }
+    }
+
+    public static void PrimeFactorization (int n) {
+        for (int i=2; i<=n; i++) {
+            while (n%i==0) {
+                n/=i;
+                System.out.println(i);
+            }
+        }
+
+        if (n >1) {
+            System.out.println(n);
         }
     }
 }
